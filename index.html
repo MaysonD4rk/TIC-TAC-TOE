@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title></title>
+	<style type="text/css">
+		#table{
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			font-size: 50px;
+		}
+		tr>td {
+			height: 100px;
+			width: 100px;
+			display: inline-flex;
+			justify-content: center;
+			align-items: center;
+		}
+	</style>
+</head>
+<body>
+
+
+	<div id="table">
+		<table border="1">
+			<tr>
+				<td id="casa1" onclick="jogada(1)"></td>
+				<td id="casa2" onclick="jogada(2)"></td>
+				<td id="casa3" onclick="jogada(3)"></td>
+			</tr>
+			<tr>
+				<td id="casa4" onclick="jogada(4)"></td>
+				<td id="casa5" onclick="jogada(5)"></td>
+				<td id="casa6" onclick="jogada(6)"></td>
+			</tr>
+			<tr>
+				<td id="casa7" onclick="jogada(7)"></td>
+				<td id="casa8" onclick="jogada(8)"></td>
+				<td id="casa9" onclick="jogada(9)"></td>
+			</tr>
+		</table>
+	</div>
+
+
+</body>
+
+	<script>
+			const player1 = []
+			const player2 = []
+
+			var playerOn = 1
+
+			const winsPossible = {
+				try1: [1,2,3],
+				try2: [4,5,6],
+				try3: [7,8,9],
+				try4: [1,4,7],
+				try5: [2,5,8],
+				try6: [3,6,9],
+				try7: [1,5,9],
+				try8: [3,5,7]
+			}
+			const availableCasas = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+			function jogada(casa){
+				
+
+				if (availableCasas.indexOf(casa) != -1) {
+					if (playerOn == 1){
+
+						document.getElementById('casa'+casa).innerHTML = 'X'
+						player1.push(casa);
+						player1.sort()
+						
+						playerOneWinCheck()
+						playerOn = 2
+						availableCasas.splice(availableCasas.indexOf(casa), 1)
+					}else{
+						document.getElementById('casa'+casa).innerHTML = 'O'
+						player2.push(casa);
+						player2.sort()
+						playerTwoWinCheck()
+						
+						playerOn = 1
+						availableCasas.splice(availableCasas.indexOf(casa), 1)
+					}
+				}
+
+				if (availableCasas.length == 0){
+					document.write('<h1>DEU VELHA</h1><button onclick="location.reload()">RECARREGAR</button>')
+				}
+
+			}
+
+			function playerOneWinCheck(){
+				var asArray = Object.entries(winsPossible);
+				var casasCheck = asArray.filter(([key, value])=>{
+					if (player1[0] == value[0] && player1[1] == value[1] && player1[2] == value[2]) {
+						document.write('<h1>PLAYER 1 VENCEDOR!!</h1><button onclick="location.reload()">RECARREGAR</button>');
+					}else{
+						
+						return false
+					}
+				})
+			}
+
+			function playerTwoWinCheck(){
+				var asArray = Object.entries(winsPossible);
+				var casasCheck = asArray.filter(([key, value])=>{
+					if (player2[0] == value[0] && player2[1] == value[1] && player2[2] == value[2]) {
+						document.write(`<h1>PLAYER 2 VENCEDOR!!</h1><button onclick="location.reload()">RECARREGAR</button>`);
+					}else{
+						
+
+						return false
+					}
+				})
+			}
+
+
+		
+	</script>
+
+</html>
