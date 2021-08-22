@@ -54,7 +54,6 @@
 
 	}
 
-	console.log(game.trys)
 
 
 	const wins = {
@@ -70,14 +69,13 @@
 
 	 function jogada(casa){
 
-	 	console.log(casa)
 	 	var campo = document.getElementById(casa);
 	 	var didAt = game.availbleField.indexOf(casa)
 
 	 	if (game.currentPlayer == 1) {
 		 	if (didAt > -1) {
 		 		game.availbleField.splice(didAt, 1);
-		 		console.log(game.availbleField)
+		 		
 		 		campo.innerHTML = 'X'
 		 		game.currentPlayer = 2;
 		 		game.player1.push(casa)
@@ -88,7 +86,7 @@
 		 }else{
 		 	if (didAt > -1) {
 		 		game.availbleField.splice(didAt, 1);
-		 		console.log(game.availbleField)
+		 		
 		 		campo.innerHTML = 'O'
 		 		game.currentPlayer = 1;
 		 		game.player2.push(casa)
@@ -101,7 +99,6 @@
 
 
 	}
-console.log(game.trys.length)
 
 
 
